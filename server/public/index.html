@@ -11,14 +11,20 @@
 <body>
     <h1>Kochab Weekend 2 Live Solve</h1>
     <div id='input'>
-        <input type="text" id="xIn">
-        <button id="addButton">+</button>
-        <button id="subtractButton">-</button>
-        <button id="multiplyButton">*</button>
-        <button id="divideButton">/</button>
-        <input type="text" id="yIn">
-        <button id="doMathButton">Do Math!</button>
+        <input type="text" id="xIn" placeholder="number 0">
+        <button class="operatorTypeButtonThing">+</button>
+        <button class="operatorTypeButtonThing">-</button>
+        <button class="operatorTypeButtonThing">*</button>
+        <button class="operatorTypeButtonThing">/</button>
+        <input type="text" id="yIn" placeholder="number 1">
+        <button id="doMathButton">Do Math! (AKA =)</button>
         <button id="goAwayButton">Go away</button>
+    </div>
+    <div id="output">
+        <h2 id="answerOut"></h2>
+        <h3>History:</h3>
+        <ul id="historyOut">
+        </ul>
     </div>
 </body>
 </html>
