@@ -8,7 +8,7 @@ app.use( express.static( 'server/public' ) );
 app.use( bodyParser.urlencoded( { extended: true } ) );
 
 // globals
-const port = 34586;
+const port = 23456;
 
 // spin up server
 app.listen( port, function(){
