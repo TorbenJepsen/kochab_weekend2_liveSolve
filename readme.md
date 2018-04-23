@@ -1,8 +1,13 @@
 Hard Mode Live Solve for Weekend Challenge 2 in Kochab
 ===
 
-Calculator-like interface.
+Base Mode
 
-Note: watch the videos in the Base Mode solve for the foundations.
+Video links:
 
-Video link: ![]()
+- ![]()
+- ![]()
+
+Hard Mode:
+
+- ![]()
