@@ -36,24 +36,29 @@ let answerMeThis = () =>{
 } // end answerMeThis
 
 let doMathNow = () => {
-    console.log( 'in doMathNow' );
-    // target elements with ids of xIn and yIn and get their val
-    // create object to send
-    let objectToSend = {
-        x: $( '#xIn ').val(),
-        y: $( '#yIn ').val(),
-        type: currentType
-    } // end objectToSend
-    console.log( 'sending to server:', objectToSend );
-    $.ajax({
-        method: 'POST',
-        url: '/doMath',
-        data: objectToSend
-    }).then( function( response ){
-        console.log( 'back from server with:', response );
-        answerMeThis();
-        historyNow();
-    }) // end ajax
+    if( $( '#xIn ').val() === '' || $( '#yIn ').val() === '' || currentType === '' ){
+        alert( 'no empties, yo!' );
+    } // end I gotz empties
+    else{
+        console.log( 'in doMathNow' );
+        // target elements with ids of xIn and yIn and get their val
+        // create object to send
+        let objectToSend = {
+            x: $( '#xIn ').val(),
+            y: $( '#yIn ').val(),
+            type: currentType
+        } // end objectToSend
+        console.log( 'sending to server:', objectToSend );
+        $.ajax({
+            method: 'POST',
+            url: '/doMath',
+            data: objectToSend
+        }).then( function( response ){
+            console.log( 'back from server with:', response );
+            answerMeThis();
+            historyNow();
+        }) // end ajax
+    } // end no empties
 } // end doMathNow
 
 let clearAll = () =>{
