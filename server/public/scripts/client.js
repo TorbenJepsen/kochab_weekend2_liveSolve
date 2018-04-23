@@ -11,10 +11,15 @@ let doMathNow = () => {
     console.log( objectToSend );
 } // end doMathNow
 
+let setOperator = () => {
+    console.log( $( this ).data( 'operatorType' ) );
+}
+
 let readyNow = () => {
     console.log( 'JQ' );
     // click handler for element with id of doMathButton
     $( '#doMathButton' ).on( 'click', doMathNow );
+    $( '.operatorButton').on( 'click', setOperator );
 } // end doc ready
 
 $( document ).ready( readyNow );
