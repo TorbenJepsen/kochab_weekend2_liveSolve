@@ -1,6 +1,14 @@
 console.log( 'js' )
 
 let currentType = '';
+let currentX = '';
+let currentY = '';
+
+let updateTextOut = () =>{
+    let el = $( '#textOut' );
+    el.empty();
+    el.val( currentX + ' ' + currentType + ' ' + currentY );
+} // updateTextOut
 
 let historyNow = () =>{
     console.log( 'in historyNow' );
@@ -28,24 +36,24 @@ let answerMeThis = () =>{
         url: '/answer'
     }).then( function( response ){
         console.log( 'back from server with:', response );
-        // target #answerOut, clear, and append answer
-        let el = $( '#answerOut' );
+        // target textOut by ID, empty, set val to answer
+        let el = $( '#textOut' );
         el.empty();
-        el.append( 'Answer: ' + response.answer );
-    })
+        el.val( response.answer );
+    }) // end ajax
 } // end answerMeThis
 
 let doMathNow = () => {
-    if( $( '#xIn ').val() === '' || $( '#yIn ').val() === '' || currentType === '' ){
-        alert( 'no empties, yo!' );
+    if( currentX === '' || currentY === '' || currentType === '' ){
+        alert( 'I don\'t understand!' );
     } // end I gotz empties
     else{
         console.log( 'in doMathNow' );
         // target elements with ids of xIn and yIn and get their val
         // create object to send
         let objectToSend = {
-            x: $( '#xIn ').val(),
-            y: $( '#yIn ').val(),
+            x: currentX,
+            y: currentY,
             type: currentType
         } // end objectToSend
         console.log( 'sending to server:', objectToSend );
@@ -57,20 +65,36 @@ let doMathNow = () => {
             console.log( 'back from server with:', response );
             answerMeThis();
             historyNow();
+            clearAll();
         }) // end ajax
     } // end no empties
 } // end doMathNow
 
 let clearAll = () =>{
     console.log( 'in clearAll' );
-    $( '#xIn ').val( '' );
-    $( '#yIn ').val( '' );
-    currentType = '';
+    currentX = '';
+    currentY = '';
+    currentType = ''
+    updateTextOut();
 } // end clearAll
+
+function setNumber(){
+    console.log( 'in setNumber' );
+    if( currentType === ''){
+        // if type is not set, append to X
+        currentX += $( this ).text();
+    } // end append to X
+    else{
+        // if type is set append to Y
+        currentY += $( this ).text();
+    } // end append to Y
+    updateTextOut();
+} // end setNumber  
 
 function setOperator(){
     console.log( 'in setOperator:', $( this ).text() );
     currentType = $( this ).text();
+    updateTextOut();
 } // end setOperator
 
 let readyNow = () => {
@@ -79,6 +103,7 @@ let readyNow = () => {
     $( '#doMathButton' ).on( 'click', doMathNow );
     $( '#goAwayButton' ).on( 'click', clearAll );
     $( '.operatorTypeButtonThing' ).on( 'click', setOperator );
+    $( '.numberButton' ).on( 'click', setNumber );
     historyNow();
 } // end doc ready
 
